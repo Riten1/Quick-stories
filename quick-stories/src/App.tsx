@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import "./App.css";
 import TextInput from "./components/ui/TextInput";
+import Sidebar from "./components/sidebar/Sidebar";
 
 const numbers = [
   {
@@ -35,32 +36,36 @@ function App() {
   });
 
   return (
-    <div className="flex flex-col gap-2 items-center">
-      <div>{count}</div>
-      <div className="flex flex-col gap-2">
-        <div className="flex gap-0.5 items-center w-full justify-center">
-          {[1, 2, 3, 4, 5].map((i) => {
-            const delay = (i - 1) * 5;
+    <div className="flex gap-4 h-screen">
+      <Sidebar />
 
-            return (
-              <div key={i} className="flex flex-col gap-4 items-center">
-                <div className="relative bg-gray-300 h-1 w-36 rounded-2xl overflow-hidden">
-                  <div
-                    className="h-full bg-gray-400 absolute left-0 top-0 w-full origin-left animate-[progress_5s_linear_forwards]"
-                    style={{
-                      animationDelay: `${delay}s`,
-                      animationFillMode: "backwards",
-                    }}
-                  />
+      <div className="flex flex-col gap-2 items-center">
+        <div>{count}</div>
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-0.5 items-center w-full justify-center">
+            {[1, 2, 3, 4, 5].map((i) => {
+              const delay = (i - 1) * 5;
+
+              return (
+                <div key={i} className="flex flex-col gap-4 items-center">
+                  <div className="relative bg-gray-300 h-1 w-36 rounded-2xl overflow-hidden">
+                    <div
+                      className="h-full bg-gray-400 absolute left-0 top-0 w-full origin-left animate-[progress_5s_linear_forwards]"
+                      style={{
+                        animationDelay: `${delay}s`,
+                        animationFillMode: "backwards",
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+          <div className=" inline">
+            {numbers.find((item) => item.id === count)?.name}
+          </div>
+          <TextInput />
         </div>
-        <div className=" inline">
-          {numbers.find((item) => item.id === count)?.name}
-        </div>
-        <TextInput />
       </div>
     </div>
   );
