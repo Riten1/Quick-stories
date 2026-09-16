@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import "./App.css";
+import TextInput from "./components/ui/TextInput";
 
 const numbers = [
   {
@@ -59,6 +60,7 @@ function App() {
         <div className=" inline">
           {numbers.find((item) => item.id === count)?.name}
         </div>
+        <TextInput />
       </div>
     </div>
   );
