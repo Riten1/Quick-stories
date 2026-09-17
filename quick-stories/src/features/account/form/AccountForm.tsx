@@ -1,12 +1,9 @@
 import { useForm } from "react-hook-form";
 import TextInput from "../../../components/ui/TextInput";
 import type IAccountFields from "../../../@types/account";
+import store from "../../../zustand/store";
 
-export const AccountForm = ({
-  setOpenAddUser,
-}: {
-  setOpenAddUser: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+export const AccountForm = () => {
   const accounts = JSON.parse(localStorage.getItem("users") || "[]");
   const { handleSubmit, register } = useForm({
     defaultValues: {
@@ -19,8 +16,7 @@ export const AccountForm = ({
   function onSubmit(data: IAccountFields) {
     accounts.push(data);
     localStorage.setItem("users", JSON.stringify(accounts));
-    setOpenAddUser(false);
-    console.log(accounts);
+    store.getState().closeModal();
   }
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>

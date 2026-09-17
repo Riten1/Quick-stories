@@ -1,4 +1,5 @@
 export default interface IUseStore {
-  isModalOpen: boolean;
-  toggleModal: (open: boolean) => void;
+  activeModal: string | null;
+  openModal: (modalName: string) => void;
+  closeModal: () => void;
 }
