@@ -1,4 +1,3 @@
-// src/components/ui/Menu.tsx
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
 interface MenuItemConfig {

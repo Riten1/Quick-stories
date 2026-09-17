@@ -1,11 +1,9 @@
-// src/components/ui/Modal.tsx
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { store } from "../../zustand/store";
 
 export default function Modal({
   modalName,
-
   children,
 }: {
   modalName: string;
