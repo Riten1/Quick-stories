@@ -4,7 +4,6 @@ import type IAccountFields from "../../../@types/account";
 import store from "../../../zustand/store";
 
 export const AccountForm = () => {
-  const accounts = JSON.parse(localStorage.getItem("users") || "[]");
   const { handleSubmit, register } = useForm({
     defaultValues: {
       id: "",
@@ -13,9 +12,10 @@ export const AccountForm = () => {
     },
   });
 
+  const addAccount = store((state) => state.addAccounts);
+
   function onSubmit(data: IAccountFields) {
-    accounts.push(data);
-    localStorage.setItem("users", JSON.stringify(accounts));
+    addAccount(data);
     store.getState().closeModal();
   }
   return (

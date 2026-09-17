@@ -6,7 +6,6 @@ import { SelectAccountModal } from "../../features/account/modal/SelectAccountMo
 
 const Sidebar = () => {
   const openModal = store((state) => state.openModal);
-  const activeModal = store((state) => state.activeModal);
   const menuItems = [
     {
       label: "Switch account",
@@ -17,7 +16,6 @@ const Sidebar = () => {
       onClick: () => console.log("Log out clicked"),
     },
   ];
-  console.log("active", activeModal);
   return (
     <>
       <div className="p-4 border border-gray-300 h-full flex flex-col justify-between items-center">

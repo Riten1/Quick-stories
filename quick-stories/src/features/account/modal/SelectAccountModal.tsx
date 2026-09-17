@@ -1,12 +1,11 @@
-import { useState } from "react";
 import Modal from "../../../components/ui/Modal";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import type IAccountFields from "../../../@types/account";
+import store from "../../../zustand/store";
 
 export const SelectAccountModal = () => {
-  const [accounts] = useState(
-    JSON.parse(localStorage.getItem("users") || "[]"),
-  );
+  const accounts = store((state) => state.accounts);
+
   return (
     <Modal modalName="selectAccount">
       <div className="flex flex-col gap-4">
@@ -16,7 +15,7 @@ export const SelectAccountModal = () => {
           </p>
         </div>{" "}
         <div className="flex flex-col gap-2">
-          {accounts.map((account: IAccountFields, index: number) => (
+          {accounts?.map((account: IAccountFields, index: number) => (
             <div className="p-2 border-b border-gray-400" key={index}>
               <div className="flex gap-2">
                 <div>
