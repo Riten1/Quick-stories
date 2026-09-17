@@ -12,6 +12,7 @@ export const AccountForm = ({
     defaultValues: {
       id: "",
       name: "",
+      hasStories: false,
     },
   });
 
@@ -36,7 +37,7 @@ export const AccountForm = ({
       <div className="flex justify-end">
         <button
           type="submit"
-          className="bg-gray-200 border border-gray-400 p-2 rounded-full cursor-pointer"
+          className="bg-gray-200 border border-gray-400 p-2 rounded-2xl cursor-pointer"
         >
           Add
         </button>
