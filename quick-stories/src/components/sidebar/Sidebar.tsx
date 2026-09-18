@@ -8,10 +8,17 @@ import { MenuDropdown } from "../ui/Menu";
 import { AddAccountModal } from "../../features/account/modal/AddAccountModal";
 import { SelectAccountModal } from "../../features/account/modal/SelectAccountModal";
 import nameIcon from "../../utils/nameIcon";
+import { useRef } from "react";
+import { uploadImage } from "../../services/upload-image";
 
 const Sidebar = () => {
   const openModal = store((state) => state.openModal);
   const currentAccount = store((state) => state.currentAccount);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  function handlePlusClick() {
+    fileInputRef.current?.click();
+  }
   const menuItems = [
     {
       label: "Switch account",
@@ -19,20 +26,43 @@ const Sidebar = () => {
     },
     {
       label: "Log out",
-      onClick: () => console.log("Log out clicked"),
+      onClick: () => {
+        sessionStorage.clear();
+        window.location.reload();
+      },
     },
   ];
   return (
     <>
       <div className="p-4 border border-gray-300 h-full flex flex-col justify-between items-center">
-        <div className="relative items-center gap-2">
-          <p className="text-xl cursor-pointer bg-gray-100 p-3 border-gray-300 border-3 rounded-full">
-            {nameIcon(currentAccount?.name)}
-          </p>
-          <span className="cursor-pointer absolute bg-white p rounded-full bottom-0 right-0">
-            {!currentAccount?.hasStories && <PlusIcon className="w-5 h-5" />}
-          </span>
-        </div>
+        {currentAccount ? (
+          <div className="relative inline-flex items-center gap-2">
+            <div className="text-xl cursor-pointer bg-gray-100 w-16 h-16 flex items-center justify-center border-gray-300 border-2 rounded-full">
+              {nameIcon(currentAccount?.name)}
+            </div>
+            <span
+              onClick={handlePlusClick}
+              className="cursor-pointer absolute bg-white p-0.5 rounded-full bottom-0 right-0 shadow-sm"
+            >
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    console.log("Selected file:", file);
+                    uploadImage(file);
+                  }
+                }}
+              />
+              {!currentAccount?.hasStories && <PlusIcon className="w-5 h-5" />}
+            </span>
+          </div>
+        ) : (
+          <p>Story</p>
+        )}
 
         <div className="flex flex-col items-center gap-2">
           <MenuDropdown

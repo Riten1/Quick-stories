@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import TextInput from "../../../components/ui/TextInput";
 import type IAccountFields from "../../../@types/account";
 import store from "../../../zustand/store";
-
+import random from "random";
 export const AccountForm = () => {
   const { handleSubmit, register } = useForm({
     defaultValues: {
@@ -13,18 +13,14 @@ export const AccountForm = () => {
   });
 
   const addAccount = store((state) => state.addAccounts);
-
+  const selectAccount = store((state) => state.selectAccount);
   function onSubmit(data: IAccountFields) {
-    addAccount(data);
+    addAccount({ ...data, id: random.int(1, 100) });
+    selectAccount(data);
     store.getState().closeModal();
   }
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-2">
-        <label htmlFor="name">ID:</label>
-        <TextInput {...register("id")} type="text" placeholder="Enter Id" />
-      </div>
-
       <div className="flex flex-col gap-2">
         <label htmlFor="name">Name:</label>
         <TextInput {...register("name")} type="text" placeholder="Enter Name" />
