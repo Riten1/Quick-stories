@@ -9,6 +9,8 @@ export const AccountForm = () => {
       id: "",
       name: "",
       hasStories: false,
+      isStoryViewed: false,
+      stories: [],
     },
   });
 

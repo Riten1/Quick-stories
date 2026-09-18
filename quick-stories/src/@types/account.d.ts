@@ -2,6 +2,6 @@ export default interface IAccountFields {
   id: string | number;
   name: string;
   hasStories?: boolean;
-  isStoryViewd?: boolean;
+  isStoryViewed?: boolean;
   stories?: string[];
 }
