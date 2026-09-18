@@ -4,4 +4,6 @@ export default interface IUseStore {
   closeModal: () => void;
   accounts: IAccountFields[];
   addAccounts: (accounts: IAccountFields) => void;
+  currentAccount: IAccountFields;
+  selectAccount: (account: IAccountFields) => void;
 }
