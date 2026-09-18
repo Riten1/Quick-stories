@@ -14,7 +14,6 @@ export async function uploadImage(image: File) {
     const res = await axios.post(uploadEndpoint, formData);
     const imageUrl = res.data.secure_url;
 
-    // Read fresh user data at the time of execution
     const currUser = JSON.parse(
       sessionStorage.getItem("currentAccount") || "{}",
     );
